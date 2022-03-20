@@ -1,12 +1,24 @@
 ﻿using MyArrayList;
 
-ArrayList listempty = new ArrayList();
+/*ArrayList listempty = new ArrayList();
 
 for (int i = 0; i < 10; i++)
 {
     listempty.AddInTheEnd(i);
-    listempty.Write();
 }
+listempty.AddInTheEnd(24);
+listempty.AddInTheEnd(-7);
+listempty.Write();
+int X = listempty.FindIndexOfMax();
+int Y = listempty.FindIndexOfMin();    
+Console.WriteLine(X);
+Console.WriteLine(Y);
+//listempty.Reverse();
+//listempty.Write();
+
+
+
+
 Console.ReadLine();
 ArrayList listOne = new ArrayList( 12 );
 for (int i = 0; i < 10; i++)
@@ -15,12 +27,10 @@ for (int i = 0; i < 10; i++)
     listOne.Write();
 }
 
-Console.ReadLine();
+Console.ReadLine();*/
 
-ArrayList listArr = new ArrayList(new int[] { 5,4,3, 3,2,1,3,2,1});
+ArrayList listArr = new ArrayList(new int[] {5, 4, 3, 3, 2, 1, 3, 2, 1});
 
-for (int i = 0; i < 6; i++)
-{
-    listArr.DeleteLast();
-    listArr.Write();
-}
+listArr.Write();
+listArr.BubbleSort(true);
+listArr.Write();
