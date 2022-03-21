@@ -23,7 +23,7 @@
             int lengthOfArr = arr.Length;
 
             _array = new int[(int)(lengthOfArr * 1.5 + 1)];
-            Length = lengthOfArr + 1;
+            Length = lengthOfArr;
             for (int i = 0; i < lengthOfArr; i++)
             {
                 _array[i] = arr[i];
@@ -48,6 +48,10 @@
 
         public void AddInTheIndex(int value, int index)
         {
+            if (index < 0 || index >= Length)
+            {
+                throw new Exception("Index out of range");
+            }
             Shift(index, Length + 1, 1);
             _array[index] = value;
         }
@@ -70,6 +74,11 @@
 
         public void DeleteInTheIndex(int index)
         {
+            if (index < 0 || index >= Length)
+            {
+                throw new Exception("Index out of range");
+            }
+
             Shift(index + 1, Length, -1);
         }
 
@@ -101,13 +110,22 @@
             Shift(ammount, Length, -ammount);
         }
 
-        public void DeleteInTheIndexAFewElements(int index, int ammount, bool right = true)
+        public void DeleteInTheIndexAFewElements(int index, int ammount)
         {
             if (ammount < 0)
             {
                 throw new Exception("Ammount of elements must be more then zero");
             }
+            for (int i = index; i < Length; i++)
+            {
+                _array[i] = _array[i + ammount];           
+            }
+            Length -= ammount;
 
+            if (Length <= ((int)_array.Length * 0.5))
+            {
+                DownSize();
+            }
         }
 
         public int ValueOfLength()
@@ -116,7 +134,7 @@
         }
         public int AccessByIndex(int index)
         {
-            if (index >= Length)
+            if (index < 0 || index >= Length)
             {
                 throw new Exception("Index out of range");
             }
@@ -141,7 +159,13 @@
             }
             _array[index] = value;
         }
-
+        public void Reverse()
+        {
+            for (int i = 0; i < Length / 2; i++)
+            {
+                ChangeNumbers(ref _array[i], ref _array[Length - i - 1]);
+            }
+        }
         public int FindMax()
         {
             int max = _array[0];
@@ -197,23 +221,90 @@
                 Reverse();
             }
         }
-
-        public void Reverse()
+        public int DeleteFirstValueAndReturnIndex(int value)
         {
-            for (int i = 0; i < Length / 2 ; i++)
-            {
-                ChangeNumbers(ref _array[i], ref _array[Length - i - 1]);
+            int index = FindFirstIndexOfValue(value);
+
+            if (index > 0)
+            { 
+                DeleteInTheIndex(index);
             }
+            return index;        
         }
 
-        public void Write()
+        public int DeleteAllValueAndReturnCount(int value)
         {
-            Console.Write($"L={Length} RL={_array.Length}   ");
+            int count = 0;
+            for (int i = 0; i < Length; i++)            
+            {
+                if (_array[i] == value)
+                {
+                    count++;
+                }
+                else
+                {
+                    _array[i - count] = _array[i];
+                }
+            }      
+            Length -= count;
+            return count;
+        }
+
+        public void AddListInTheEnd(int[] arr)
+        { 
+        int newLength = (int) ((arr.Length + Length) * 1.5d + 1);
+        int[] newArray = new int[newLength];
             for (int i = 0; i < Length; i++)
             {
-                Console.Write($"{_array[i]} ");
+                newArray[i] = _array[i];
             }
-            Console.WriteLine();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                newArray[i + Length] = arr[i];
+            }
+            _array = newArray;
+            Length = arr.Length + Length;
+        }
+
+        public void AddListInTheStart(int[] arr)
+        {
+            int newLength = (int)((arr.Length + Length) * 1.5d + 1);
+            int[] newArray = new int[newLength];
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                newArray[i] = arr[i];
+            }
+            for (int i = 0; i < Length; i++)
+            {
+                newArray[i + arr.Length] = _array[i];
+            }
+            _array = newArray;
+            Length = arr.Length + Length;
+        }
+
+        public void AddListInTheIndex(int[] arr, int index)
+        {
+            int newLength = (int)((arr.Length + Length) * 1.5d + 1);
+            int[] newArray = new int[newLength];
+
+
+            for (int i = 0; i < index - 1; i++)
+            {
+                newArray[i] = _array[i];
+            }
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                newArray[i + index - 1] = arr[i];
+            }
+
+            for (int i = index - 1; i < Length; i++)
+            {
+                newArray[i + arr.Length] = _array[i];
+            }
+            _array = newArray;
+            Length = arr.Length + Length;
         }
 
         private void UpSize()
@@ -236,8 +327,7 @@
             }
             _array = newArray;
         }
-
-        public void Shift(int firstIndex, int lastIndex, int step)
+        private void Shift(int firstIndex, int lastIndex, int step)
         {
             Length += step;
 
@@ -271,9 +361,18 @@
             int tmp = b;
             b = a;
             a = tmp;
+        }
 
-
-
+        public void Write()
+        {
+            Console.Write($"L={Length} RL={_array.Length}   ");
+            for (int i = 0; i < Length; i++)
+            {
+                Console.Write($"{_array[i]} ");
+            }
+            Console.WriteLine();
         }
     }
+
+
 }
