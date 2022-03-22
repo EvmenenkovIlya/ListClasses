@@ -76,7 +76,7 @@
         {
             if (index < 0 || index >= Length)
             {
-                throw new Exception("Index out of range");
+                throw new IndexOutOfRangeException();
             }
             Shift(index, Length + 1, 1);
             _array[index] = value;
@@ -102,7 +102,7 @@
         {
             if (index < 0 || index >= Length)
             {
-                throw new Exception("Index out of range");
+                throw new IndexOutOfRangeException();
             }
 
             Shift(index + 1, Length, -1);
@@ -110,9 +110,9 @@
 
         public void DeleteInTheEndAFewElements(int ammount)
         {
-            if (ammount < 0)
+            if ((ammount <= 0) || (ammount > Length))
             {
-                throw new Exception("Ammount of elements must be more then zero");
+                throw new Exception("Ammount of elements must be more then zero and less than Length");
             }
 
             for (int i = Length - 1; i >= Length - ammount; i--)
@@ -130,18 +130,22 @@
 
         public void DeleteInTheStartAFewElements(int ammount)
         {
-            if (ammount < 0)
+            if ((ammount <= 0) || (ammount > Length))
             {
-                throw new Exception("Ammount of elements must be more then zero");
+                throw new Exception("Ammount of elements must be more then zero and less than Length");
             }
             Shift(ammount, Length, -ammount);
         }
 
         public void DeleteInTheIndexAFewElements(int index, int ammount)
         {
-            if (ammount < 0)
+            if ((ammount <= 0) || (ammount > Length))
             {
-                throw new Exception("Ammount of elements must be more then zero");
+                throw new Exception("Ammount of elements must be more then zero  and less than Length");
+            }
+            if (index < 0 || index >= Length)
+            {
+                throw new IndexOutOfRangeException();
             }
             for (int i = index; i < Length; i++)
             {
