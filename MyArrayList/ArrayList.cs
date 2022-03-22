@@ -6,6 +6,25 @@
 
         private int[] _array;
 
+        public int this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= Length)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                return _array[index];
+            }
+            set
+            {
+                if (index < 0 || index >= Length)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                _array[index] = value;
+            }
+        }
         public ArrayList()
         {
             _array = new int[10];
@@ -20,6 +39,12 @@
         }
         public ArrayList(int[] arr)
         {
+            if (arr == null || arr.Length == 0)
+            {
+                _array = new int[10];
+                Length = 0;
+            }
+
             int lengthOfArr = arr.Length;
 
             _array = new int[(int)(lengthOfArr * 1.5 + 1)];
@@ -40,6 +65,7 @@
             _array[Length] = value;
             Length++;
         }
+
         public void AddInTheStart(int value)
         {
             Shift(0, Length + 1, 1);
@@ -101,6 +127,7 @@
                 DownSize();
             }
         }
+
         public void DeleteInTheStartAFewElements(int ammount)
         {
             if (ammount < 0)
@@ -132,6 +159,7 @@
         {
             return Length;
         }
+
         public int AccessByIndex(int index)
         {
             if (index < 0 || index >= Length)
@@ -151,6 +179,7 @@
             }
             return -1;
         }
+
         public void ChangeValueInTheIndex(int value, int index)
         {
             if (index >= Length)
@@ -159,6 +188,7 @@
             }
             _array[index] = value;
         }
+
         public void Reverse()
         {
             for (int i = 0; i < Length / 2; i++)
@@ -166,6 +196,7 @@
                 ChangeNumbers(ref _array[i], ref _array[Length - i - 1]);
             }
         }
+
         public int FindMax()
         {
             int max = _array[0];
@@ -178,6 +209,7 @@
             }
             return max;
         }
+
         public int FindMin()
         {
             int min = _array[0];
@@ -190,11 +222,13 @@
             }
             return min;
         }
+
         public int FindIndexOfMax()
         {
             int max = FindMax();
             return FindFirstIndexOfValue(max);
         }
+
         public int FindIndexOfMin()
         {
             int min = FindMin();
@@ -221,6 +255,7 @@
                 Reverse();
             }
         }
+
         public int DeleteFirstValueAndReturnIndex(int value)
         {
             int index = FindFirstIndexOfValue(value);
@@ -317,6 +352,7 @@
             }
             _array = newArray;
         }
+
         private void DownSize()
         {
             int newLength = (int)(_array.Length / 1.3d + 1);
@@ -327,6 +363,47 @@
             }
             _array = newArray;
         }
+
+        public override string ToString()
+        {
+            string s = "";
+
+            for (int i = 0; i < Length; i++)
+            {
+                s += $"{_array[i]} ";
+            }
+
+            return s;
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is ArrayList))
+            {
+                return false;
+            }
+            else
+            {
+                ArrayList list = (ArrayList)obj;
+                if (list.Length != this.Length)
+                {
+                    return false;
+                }
+                else
+                {
+                    for (int i = 0; i < this.Length; i++)
+                    {
+                        if (list[i] != this[i])
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+
+        }
+
+
         private void Shift(int firstIndex, int lastIndex, int step)
         {
             Length += step;
@@ -356,6 +433,7 @@
             }
 
         }
+
         private void ChangeNumbers(ref int a, ref int b)
         {
             int tmp = b;
@@ -373,6 +451,4 @@
             Console.WriteLine();
         }
     }
-
-
 }
