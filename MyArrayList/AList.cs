@@ -1,6 +1,6 @@
 ﻿namespace MyArrayList
 {
-    public class ArrayList
+    public class AList
     {
         public int Length { get; private set; }
 
@@ -25,19 +25,19 @@
                 _array[index] = value;
             }
         }
-        public ArrayList()
+        public AList()
         {
             _array = new int[10];
             Length = 0;
         }
 
-        public ArrayList(int element)
+        public AList(int element)
         {
             _array = new int[10];
             _array[0] = element;
             Length = 1;
         }
-        public ArrayList(int[] arr)
+        public AList(int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
@@ -84,6 +84,10 @@
 
         public void DeleteLast()
         {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
             _array[Length - 1] = 0;
             Length--;
 
@@ -95,6 +99,10 @@
 
         public void DeleteFirst()
         {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
             Shift(1, Length, -1);
         }
 
@@ -104,22 +112,32 @@
             {
                 throw new IndexOutOfRangeException();
             }
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
 
             Shift(index + 1, Length, -1);
         }
 
         public void DeleteInTheEndAFewElements(int ammount)
         {
-            if ((ammount <= 0) || (ammount > Length))
+            if ((ammount < 0) || (ammount > Length))
             {
                 throw new Exception("Ammount of elements must be more then zero and less than Length");
             }
-
+            if (ammount == 0)
+            {
+                return;
+            }
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
             for (int i = Length - 1; i >= Length - ammount; i--)
             {
                 _array[i] = 0;
             }
-
             Length -= ammount;
 
             if (Length <= ((int)_array.Length * 0.5))
@@ -130,22 +148,38 @@
 
         public void DeleteInTheStartAFewElements(int ammount)
         {
-            if ((ammount <= 0) || (ammount > Length))
+            if ((ammount < 0) || (ammount > Length))
             {
                 throw new Exception("Ammount of elements must be more then zero and less than Length");
+            }
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            if (ammount == 0)
+            {
+                return;
             }
             Shift(ammount, Length, -ammount);
         }
 
         public void DeleteInTheIndexAFewElements(int index, int ammount)
         {
-            if ((ammount <= 0) || (ammount > Length))
+            if ((ammount < 0) || (ammount > Length) || (index + ammount > Length))
             {
                 throw new Exception("Ammount of elements must be more then zero  and less than Length");
             }
             if (index < 0 || index >= Length)
             {
                 throw new IndexOutOfRangeException();
+            }
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            if (ammount == 0)
+            {
+                return;
             }
             for (int i = index; i < Length; i++)
             {
@@ -159,7 +193,7 @@
             }
         }
 
-        public int ValueOfLength()
+        public int ReturnLength()
         {
             return Length;
         }
@@ -289,42 +323,42 @@
             return count;
         }
 
-        public void AddListInTheEnd(int[] arr)
+        public void AddListInTheEnd(AList list)
         { 
-        int newLength = (int) ((arr.Length + Length) * 1.5d + 1);
+        int newLength = (int) ((list.Length + this.Length) * 1.5d + 1);
         int[] newArray = new int[newLength];
-            for (int i = 0; i < Length; i++)
+            for (int i = 0; i < this.Length; i++)
             {
                 newArray[i] = _array[i];
             }
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < list.Length; i++)
             {
-                newArray[i + Length] = arr[i];
+                newArray[i + Length] = list[i];
             }
             _array = newArray;
-            Length = arr.Length + Length;
+            Length = list.Length + Length;
         }
 
-        public void AddListInTheStart(int[] arr)
+        public void AddListInTheStart(AList list)
         {
-            int newLength = (int)((arr.Length + Length) * 1.5d + 1);
+            int newLength = (int)((list.Length + this.Length) * 1.5d + 1);
             int[] newArray = new int[newLength];
 
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < list.Length; i++)
             {
-                newArray[i] = arr[i];
+                newArray[i] = list[i];
             }
             for (int i = 0; i < Length; i++)
             {
-                newArray[i + arr.Length] = _array[i];
+                newArray[i + list.Length] = _array[i];
             }
             _array = newArray;
-            Length = arr.Length + Length;
+            Length = list.Length + Length;
         }
 
-        public void AddListInTheIndex(int[] arr, int index)
+        public void AddListInTheIndex(AList list, int index)
         {
-            int newLength = (int)((arr.Length + Length) * 1.5d + 1);
+            int newLength = (int)((list.Length + Length) * 1.5d + 1);
             int[] newArray = new int[newLength];
 
 
@@ -333,17 +367,17 @@
                 newArray[i] = _array[i];
             }
 
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < list.Length; i++)
             {
-                newArray[i + index - 1] = arr[i];
+                newArray[i + index - 1] = list[i];
             }
 
             for (int i = index - 1; i < Length; i++)
             {
-                newArray[i + arr.Length] = _array[i];
+                newArray[i + list.Length] = _array[i];
             }
             _array = newArray;
-            Length = arr.Length + Length;
+            Length = list.Length + Length;
         }
 
         private void UpSize()
@@ -370,24 +404,24 @@
 
         public override string ToString()
         {
-            string s = "";
+            string s = "[";
 
             for (int i = 0; i < Length; i++)
             {
                 s += $"{_array[i]} ";
             }
-
+            s += "]";
             return s;
         }
         public override bool Equals(object? obj)
         {
-            if (obj == null || !(obj is ArrayList))
+            if (obj == null || !(obj is AList))
             {
                 return false;
             }
             else
             {
-                ArrayList list = (ArrayList)obj;
+                AList list = (AList)obj;
                 if (list.Length != this.Length)
                 {
                     return false;

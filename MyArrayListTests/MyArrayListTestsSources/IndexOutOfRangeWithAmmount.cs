@@ -3,24 +3,25 @@ using MyArrayList;
 
 namespace MyArrayListTests.MyArrayListTestsSources
 {
-    internal class IndexOutOfRange : IEnumerable
+    internal class IndexOutOfRangeWithAmmount : IEnumerable
     {
         public IEnumerator GetEnumerator()
         {
-            int value = 3;
+            int ammount = 3;
             int index = 7;
             MyArrayList.AList list = new MyArrayList.AList(new int[] { 1, 2, 3, 4, 5 });        
-            yield return new object[] { value, index, list};
+            yield return new object[] { ammount, index, list};
 
-            value = 2;
+            ammount = 0;
             index = 0;
             list = new MyArrayList.AList(new int[] {});
-            yield return new object[] { value, index, list};
+            yield return new object[] { ammount, index, list};
 
-            value = 10;
+            ammount = 3;
             index = -3;
             list = new MyArrayList.AList(new int[] { 1, 2, 3, 4, 5 });
-            yield return new object[] { value, index, list};
+            yield return new object[] { ammount, index, list};
         }
+
     }
 }

@@ -10,26 +10,26 @@ namespace MyArrayListTests.MyArrayListTestsSources
         {   
             int index = 1;
             int ammount = 3;
-            MyArrayList.ArrayList list = new MyArrayList.ArrayList(new int[] { 1, 5 });
-            MyArrayList.ArrayList expectedList = new MyArrayList.ArrayList(new int[] { 1, 5 });
+            MyArrayList.AList list = new MyArrayList.AList(new int[] { 1, 2, 3, 4, 5 });
+            MyArrayList.AList expectedList = new MyArrayList.AList(new int[] { 1, 5 });
             yield return new object[] {index, ammount, list, expectedList };
 
             index = 0;
             ammount = 2;
-            list = new MyArrayList.ArrayList(new int[] { 44, 33, 22, 11 });
-            expectedList = new MyArrayList.ArrayList(new int[] { 22, 11 });
+            list = new MyArrayList.AList(new int[] { 44, 33, 22, 11 });
+            expectedList = new MyArrayList.AList(new int[] { 22, 11 });
             yield return new object[] { index, ammount, list, expectedList };
 
             index = 2;
             ammount = 2;
-            list = new MyArrayList.ArrayList(new int[] { 44, 33, 22, 11 });
-            expectedList = new MyArrayList.ArrayList(new int[] { 44, 33});
+            list = new MyArrayList.AList(new int[] { 44, 33, 22, 11 });
+            expectedList = new MyArrayList.AList(new int[] { 44, 33});
             yield return new object[] { index, ammount, list, expectedList };
 
             index = 0;
             ammount = 1;
-            list = new MyArrayList.ArrayList(new int[] { 44 });
-            expectedList = new MyArrayList.ArrayList(new int[] { });
+            list = new MyArrayList.AList(new int[] { 44 });
+            expectedList = new MyArrayList.AList(new int[] { });
             yield return new object[] {index, ammount, list, expectedList };
 
         }

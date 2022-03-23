@@ -29,11 +29,14 @@ for (int i = 0; i < 10; i++)
 
 Console.ReadLine();*/
 
-ArrayList listArr = new ArrayList(new int[] {5, 4, 2, 3, 3, 2, 1, 3, 2, 1});
-
+AList listArr = new AList(new int[] {5, 4, 2, 3, 3, 2, 1, 3, 2, 1});
+AList listArr2 = new AList(new int[] { 9,9,8});
 listArr.Write();
-listArr.DeleteInTheEndAFewElements(1);
+listArr.AddListInTheEnd(listArr2);
 //int x = listArr.DeleteAllValueAndReturnCount(2);
+listArr.AddListInTheStart(listArr2);
+listArr.AddListInTheIndex(listArr2, 4);
 listArr.Write();
-Console.WriteLine(listArr[2]);
+
+//Console.WriteLine(listArr[2]);
 //Console.WriteLine(x); ;
