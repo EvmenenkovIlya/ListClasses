@@ -137,7 +137,7 @@ namespace MyArrayListTests
         public void DeleteInTheEndAFewElementsTest_WhenWhenIndexOutOfRange_ShouldThrowExeption(int ammount, int index,  AList list)
         {
             {
-                 Assert.Throws<IndexOutOfRangeException>(() => list.DeleteInTheIndexAFewElements(index, ammount));
+                 Assert.Throws<Exception>(() => list.DeleteInTheIndexAFewElements(index, ammount));
             }
         }
 
@@ -161,5 +161,29 @@ namespace MyArrayListTests
             int a;
             Assert.Throws<IndexOutOfRangeException>(() => a = list[index]);
         }
+
+        [TestCaseSource(typeof(FindFirstIndexOfValueTestSource))]
+        public void FindFirstIndexOfValueTest(int expectedIndex, int value, AList list)
+        {
+            int actualIndex = list.FindFirstIndexOfValue(value);
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+
+        [Test]
+        public void FindFirstIndexOfValue_WhenListIsEmpty_ShouldThrowException()
+        {
+            AList list = new AList();
+            Assert.Throws<Exception>(() => list.FindFirstIndexOfValue(0));
+        }
+
+        [TestCaseSource(typeof(ReverseTestSource))]
+        public void ReverseTest(AList expectedResult, AList list)
+        {
+            AList actualResult = new AList();
+            actualResult = actualResult.CopyAList(list);
+            actualResult.Reverse();
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
     }
 }

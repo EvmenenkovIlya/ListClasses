@@ -208,6 +208,10 @@
         }
         public int FindFirstIndexOfValue(int value)
         {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
             for (int i = 0; i <= Length; i++)
             {
                 if (_array[i] == value)
@@ -478,7 +482,13 @@
             b = a;
             a = tmp;
         }
+        public AList CopyAList(AList list)
+        {           
+            AList newList = new AList();
+            newList.AddListInTheStart(list);
 
+            return newList;
+        }
         public void Write()
         {
             Console.Write($"L={Length} RL={_array.Length}   ");
