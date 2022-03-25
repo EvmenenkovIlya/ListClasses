@@ -165,11 +165,11 @@
 
         public void DeleteInTheIndexAFewElements(int index, int ammount)
         {
-            if ((ammount < 0) || (ammount > Length) || (index + ammount > Length))
+            if ((ammount < 0) || (ammount > Length))
             {
                 throw new Exception("Ammount of elements must be more then zero  and less than Length");
             }
-            if (index < 0 || index >= Length)
+            if (index < 0 || index >= Length || (index + ammount > Length))
             {
                 throw new IndexOutOfRangeException();
             }
@@ -241,8 +241,12 @@
 
         public int FindMax()
         {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
             int max = _array[0];
-            for (int i = 0; i <= Length; i++)
+            for (int i = 0; i < Length; i++)
             {
                 if (_array[i] > max)
                 { 
@@ -254,8 +258,12 @@
 
         public int FindMin()
         {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
             int min = _array[0];
-            for (int i = 0; i <= Length; i++)
+            for (int i = 0; i < Length; i++)
             {
                 if (_array[i] < min)
                 {
@@ -267,12 +275,20 @@
 
         public int FindIndexOfMax()
         {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
             int max = FindMax();
             return FindFirstIndexOfValue(max);
         }
 
         public int FindIndexOfMin()
         {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
             int min = FindMin();
             return FindFirstIndexOfValue(min);
         }

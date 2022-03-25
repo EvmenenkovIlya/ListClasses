@@ -17,8 +17,6 @@ Console.WriteLine(Y);
 listempty.Write();
 
 
-
-
 Console.ReadLine();
 ArrayList listOne = new ArrayList( 12 );
 for (int i = 0; i < 10; i++)
@@ -27,7 +25,7 @@ for (int i = 0; i < 10; i++)
     listOne.Write();
 }
 
-Console.ReadLine();*/
+Console.ReadLine();
 
 AList listArr = new AList(new int[] {5, 4, 2, 3, 3, 2, 1, 3, 2, 1});
 AList listArr2 = new AList(new int[] { 9,9,8});
@@ -39,4 +37,11 @@ listArr.AddListInTheIndex(listArr2, 4);
 listArr.Write();
 
 //Console.WriteLine(listArr[2]);
-//Console.WriteLine(x); ;
+//Console.WriteLine(x); */
+LinkList list = new LinkList(new int[] { 9,5,4,3,2});
+for (int i = 0; i < 10; i++)
+{ 
+    list.AddInTheEnd(i);
+}
+list.Write();
+

@@ -25,7 +25,7 @@ namespace MyArrayListTests
         }
 
         [TestCaseSource(typeof(AddInTheIndexTestSource))]
-        public void AddInTheIndexTest(int value, int index , AList list, AList expectedList)
+        public void AddInTheIndexTest(int value, int index, AList list, AList expectedList)
         {
             list.AddInTheIndex(value, index);
             AList actualList = list;
@@ -127,17 +127,17 @@ namespace MyArrayListTests
         }
 
         [TestCaseSource(typeof(AmmountMoreThanLengthOrLessThenZeroWithIndex))]
-        public void DeleteInTheIndexAFewElementsTest_WhenAmmountOutOfLength_ShouldThrowExeption( int ammount, int index, AList list)
+        public void DeleteInTheIndexAFewElementsTest_WhenAmmountOutOfLength_ShouldThrowExeption(int ammount, int index, AList list)
         {
             {
-                Assert.Throws<Exception>(() => list.DeleteInTheIndexAFewElements(index , ammount));
+                Assert.Throws<Exception>(() => list.DeleteInTheIndexAFewElements(index, ammount));
             }
         }
         [TestCaseSource(typeof(IndexOutOfRangeWithAmmount))]
-        public void DeleteInTheEndAFewElementsTest_WhenWhenIndexOutOfRange_ShouldThrowExeption(int ammount, int index,  AList list)
+        public void DeleteInTheEndAFewElementsTest_WhenWhenIndexOutOfRange_ShouldThrowExeption(int ammount, int index, AList list)
         {
             {
-                 Assert.Throws<Exception>(() => list.DeleteInTheIndexAFewElements(index, ammount));
+                Assert.Throws<IndexOutOfRangeException>(() => list.DeleteInTheIndexAFewElements(index, ammount));
             }
         }
 
@@ -176,6 +176,22 @@ namespace MyArrayListTests
             Assert.Throws<Exception>(() => list.FindFirstIndexOfValue(0));
         }
 
+        [TestCaseSource(typeof(ChangingByIndexTestSource))]
+        public void ChangingByIndexTest(int index, AList list)
+        {
+            list[index] = 5;
+            int actualValue = list[index];
+            Assert.AreEqual(5, actualValue);
+        }
+
+        [TestCaseSource(typeof(IndexOutOfRange))]
+        public void ChangingByIndexTest_WhenWhenIndexOutOfRange_ShouldThrowExeption(int some, int index, AList list)
+        {
+            {
+                Assert.Throws<IndexOutOfRangeException>(() => list[index] = 0);
+            }
+        }
+
         [TestCaseSource(typeof(ReverseTestSource))]
         public void ReverseTest(AList expectedResult, AList list)
         {
@@ -185,5 +201,76 @@ namespace MyArrayListTests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
+        [TestCaseSource(typeof(FindMaxTestSource))]
+        public void FindMaxTest(int expectedMax, AList list)
+        {
+            int actualMax = list.FindMax();
+            Assert.AreEqual(expectedMax, actualMax);
+        }
+
+        [Test]
+        public void FindMax_WhenListIsEmpty_ShouldThrowException()
+        {
+            AList list = new AList();
+            Assert.Throws<Exception>(() => list.FindMax());
+        }
+
+        [TestCaseSource(typeof(FindMinTestSource))]
+        public void FindMinTest(int expectedMin, AList list)
+        {
+            int actualMin = list.FindMin();
+            Assert.AreEqual(expectedMin, actualMin);
+        }
+
+        [Test]
+        public void FindMin_WhenListIsEmpty_ShouldThrowException()
+        {
+            AList list = new AList();
+            Assert.Throws<Exception>(() => list.FindMin());
+        }
+
+        [TestCaseSource(typeof(FindIndexOfMaxTestSource))]
+        public void FindIndexOfMaxTest(int expectedIndex, AList list)
+        {
+            int actualIndex = list.FindIndexOfMax();
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+
+        [Test]
+        public void FindIndexOfMax_WhenListIsEmpty_ShouldThrowException()
+        {
+            AList list = new AList();
+            Assert.Throws<Exception>(() => list.FindIndexOfMax());
+        }
+
+        [TestCaseSource(typeof(FindIndexOfMinTestSource))]
+        public void FindIndexOfMinTest(int expectedIndex, AList list)
+        {
+            int actualIndex = list.FindIndexOfMin();
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+
+        [Test]
+        public void FindIndexOfMin_WhenListIsEmpty_ShouldThrowException()
+        {
+            AList list = new AList();
+            Assert.Throws<Exception>(() => list.FindIndexOfMin());
+        }
+
+        [TestCaseSource(typeof(IncreaseSortTestSource))]
+        public void BubbleSortTest(AList list, AList expectedList)
+        {
+            list.BubbleSort();
+            AList actualList = list;
+            Assert.AreEqual(expectedList, actualList);
+        }
+
+        [TestCaseSource(typeof(DecreaseSortTestSource))]
+        public void BubbleSortDecriseTest(AList list, AList expectedList)
+        {
+            list.BubbleSort(true);
+            AList actualList = list;
+            Assert.AreEqual(expectedList, actualList);
+        }
     }
 }
