@@ -11,8 +11,7 @@ namespace MyArrayList
         private Node _root;
 
         private Node _tail;
-
-        public int Length;
+        public int Length { get; private set; }
 
         public int this[int index]
         {
@@ -41,7 +40,6 @@ namespace MyArrayList
                 for (int i = 1; i <= index; i++)
                 {
                     crnt = crnt.Next;
-
                 }
                 crnt.Value = value;
             }
@@ -51,12 +49,14 @@ namespace MyArrayList
         {
             _root = null;
             _tail = null;
+            Length = 0;
         }
 
         public LinkList(int value)
         {
             _root = new Node(value);
             _tail = _root;
+            Length = 1;
         }
         public LinkList(int[] array)
         {
@@ -69,6 +69,7 @@ namespace MyArrayList
             {
                 AddInTheEnd(array[i]);
             }
+            Length = array.Length;
         }
 
         public void AddInTheEnd(int value)
@@ -83,8 +84,48 @@ namespace MyArrayList
                 _tail.Next = new Node(value);
                 _tail = _tail.Next;
             }
+            Length += 1;
         }
 
+
+        public override string ToString()
+        {
+            string s = "[";
+            Node crnt = _root;
+            while (crnt != null)
+            {
+                s += $"{crnt.Value} ";
+                crnt = crnt.Next;
+            }
+                s += "]";                     
+            return s;
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is LinkList))
+            {
+                return false;
+            }
+            else
+            {
+                LinkList list = (LinkList)obj;
+                if (list.Length != this.Length)
+                {
+                    return false;
+                }
+                else
+                {
+                    for (int i = 0; i < this.Length; i++)
+                    {
+                        if (list[i] != this[i])
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
         public void Write()
         {
             Node crnt = _root;
@@ -97,5 +138,8 @@ namespace MyArrayList
             Console.Write("]");
             Console.WriteLine();
         }
+
+
+
     }
 }

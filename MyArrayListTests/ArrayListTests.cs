@@ -5,7 +5,7 @@ using MyArrayListTests.MyArrayListTestsSources;
 
 namespace MyArrayListTests
 {
-    public class Tests
+    public class TestForArrayList
     {
 
         [TestCaseSource(typeof(AddInTheEndTestSource))]
