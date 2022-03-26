@@ -34,10 +34,8 @@ namespace MyArrayListTests
 
         [TestCaseSource(typeof(IndexOutOfRange))]
         public void AddInTheIndexTest_WhenIndexOutOfRange_ShouldThrowExeption(int value, int index, AList list)
-        {
-            {
-                Assert.Throws<IndexOutOfRangeException>(() => list.AddInTheIndex(value, index));
-            }
+        {          
+            Assert.Throws<IndexOutOfRangeException>(() => list.AddInTheIndex(value, index));        
         }
 
         [TestCaseSource(typeof(DeleteLastTestSource))]

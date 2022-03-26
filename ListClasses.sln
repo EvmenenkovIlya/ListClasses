@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleForTests", "ConsoleForTests\ConsoleForTests.csproj", "{056A4A17-AB4D-402A-B4EC-C0FAF90459B9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyArrayList", "MyArrayList\MyArrayList.csproj", "{21AD27AE-E3CC-47F6-AC82-41A7A05EBE1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyArrayLists", "MyArrayList\MyArrayLists.csproj", "{21AD27AE-E3CC-47F6-AC82-41A7A05EBE1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyArrayListTests", "MyArrayListTests\MyArrayListTests.csproj", "{CB8CFF63-F511-41F3-8F83-E9390F174507}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyArrayListTests", "MyArrayListTests\MyArrayListTests.csproj", "{CB8CFF63-F511-41F3-8F83-E9390F174507}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -103,6 +103,83 @@ namespace MyArrayList
             Length += 1;
         }
 
+        public void AddInTheIndex(int value, int index)
+        {
+            if (index < 0 || index >= Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (index == 0)
+            {
+                AddInTheStart(value);
+            }
+            else
+            {
+                Node previosNode = GetNode(index - 1);
+                Node nextNode = GetNode(index);
+                Node crnt = new Node(value);
+                previosNode.Next = crnt;
+                crnt.Next = nextNode;
+                
+            }
+            Length += 1;
+        }
+
+        public void DeleteInTheEnd()
+        {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            _tail = null;
+            Length -= 1;
+        }
+
+        public void DeleteInTheStart()
+        {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            _root = _root.Next;
+            Length -= 1;
+        }
+
+        public void DeleteInTheEndAFewElements(int ammount)
+        {
+            if ((ammount < 0) || (ammount > Length))
+            {
+                throw new Exception("Ammount of elements must be more then zero and less than Length");
+            }
+            if (ammount == 0)
+            {
+                return;
+            }
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            _tail = GetNode(Length - ammount);
+            Length -= ammount;
+        }
+
+        public void DeleteInTheStartAFewElements(int ammount)
+        {
+            if ((ammount < 0) || (ammount > Length))
+            {
+                throw new Exception("Ammount of elements must be more then zero and less than Length");
+            }
+            if (ammount == 0)
+            {
+                return;
+            }
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            _root = GetNode(ammount);
+            Length -= ammount;
+        }
 
         public override string ToString()
         {
@@ -137,11 +214,13 @@ namespace MyArrayList
                         {
                             return false;
                         }
-                    }
-                    return true;
+                    }                   
                 }
             }
+            return true;
         }
+
+
         public void Write()
         {
             Node crnt = _root;
@@ -155,7 +234,21 @@ namespace MyArrayList
             Console.WriteLine();
         }
 
-
+        private Node GetNode(int index)
+        {
+            Node crnt = _root;
+            for (int i = 0; i < index; i++)
+            { 
+            crnt = crnt.Next;
+            }
+            return crnt;
+        }
+        private void SwapValueInNode(ref Node a, ref Node b)
+        {
+            int tmp = a.Value;
+            a.Value = b.Value; 
+            b.Value = tmp; 
+        }
 
     }
 }
