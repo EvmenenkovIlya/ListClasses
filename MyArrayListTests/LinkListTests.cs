@@ -108,6 +108,55 @@ namespace MyArrayListTests
 
             Assert.Throws<Exception>(() => list.DeleteInTheStartAFewElements(ammount));
         }
+        
+        [TestCaseSource(typeof(LengthTestSource))]
+        public void LengthTest(int expectedLength, LinkList list)
+        {
+            int actualLength = list.Length;                       
+            Assert.AreEqual(expectedLength, actualLength);
+
+        }
+
+        [TestCaseSource(typeof(GetByIndexPositiveTestSource))]
+        public void GetByIndexTest(int index, int value, LinkList list )
+        {
+            int actualValue = list[index];
+            Assert.AreEqual(value, actualValue);
+        }
+        [TestCaseSource(typeof(GetByIndexNegativeTestSource))]
+        public void GetByIndexTest_WhenIndexOutOfRangeOfList_ShouldThrowIndexOutOfRangeException(int index, LinkList list)
+        {
+            int a;
+            Assert.Throws<IndexOutOfRangeException>(() => a = list[index]);
+        }
+        [TestCaseSource(typeof(ChangingByIndexTestSource))]
+        public void ChangingByIndexTest(int index, LinkList list)
+        {
+            list[index] = 5;
+            int actualValue = list[index];
+            Assert.AreEqual(5, actualValue);
+        }
+        
+        [TestCaseSource(typeof(FindFirstIndexOfValueTestSource))]
+        public void FindFirstIndexOfValueTest(int expectedIndex, int value, LinkList list)
+        {
+            int actualIndex = list.FindFirstIndexOfValue(value);
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+
+        [Test]
+        public void FindFirstIndexOfValue_WhenListIsEmpty_ShouldThrowException()
+        {
+            LinkList list = new LinkList();
+            Assert.Throws<Exception>(() => list.FindFirstIndexOfValue(0));
+        }
+        [TestCaseSource(typeof(ReverseTestSource))]
+        public void ReverseTest(LinkList expectedResult, LinkList list)
+        {
+            list.Reverse();
+            LinkList actualResult = list;
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
     }
 }

@@ -79,9 +79,7 @@ namespace MyArrayListTests
         [TestCaseSource(typeof(IndexOutOfRange))]
         public void DeleteInTheIndexTest_WhenIndexOutOfRange_ShouldThrowExeption(int value, int index, AList list)
         {
-            {
-                Assert.Throws<IndexOutOfRangeException>(() => list.DeleteInTheIndex(index));
-            }
+            Assert.Throws<IndexOutOfRangeException>(() => list.DeleteInTheIndex(index));
         }
 
         [TestCaseSource(typeof(DeleteInTheEndAFewElementsTestSource))]
@@ -95,9 +93,7 @@ namespace MyArrayListTests
         [TestCaseSource(typeof(AmmountMoreThanLengthOrLessThenZero))]
         public void DeleteInTheEndAFewElementsTest_WhenAmmountOutOfLength_ShouldThrowExeption(int ammount, AList list)
         {
-            {
-                Assert.Throws<Exception>(() => list.DeleteInTheEndAFewElements(ammount));
-            }
+        Assert.Throws<Exception>(() => list.DeleteInTheEndAFewElements(ammount));
         }
 
         [TestCaseSource(typeof(DeleteInTheStartAFewElementsTestSource))]
@@ -111,9 +107,7 @@ namespace MyArrayListTests
         [TestCaseSource(typeof(AmmountMoreThanLengthOrLessThenZero))]
         public void DeleteInTheStartAFewElementsTest_WhenAmmountOutOfLength_ShouldThrowExeption(int ammount, AList list)
         {
-            {
-                Assert.Throws<Exception>(() => list.DeleteInTheStartAFewElements(ammount));
-            }
+            Assert.Throws<Exception>(() => list.DeleteInTheStartAFewElements(ammount));
         }
 
         [TestCaseSource(typeof(DeleteInTheIndexAFewElementsTestSource))]
@@ -127,16 +121,12 @@ namespace MyArrayListTests
         [TestCaseSource(typeof(AmmountMoreThanLengthOrLessThenZeroWithIndex))]
         public void DeleteInTheIndexAFewElementsTest_WhenAmmountOutOfLength_ShouldThrowExeption(int ammount, int index, AList list)
         {
-            {
-                Assert.Throws<Exception>(() => list.DeleteInTheIndexAFewElements(index, ammount));
-            }
+            Assert.Throws<Exception>(() => list.DeleteInTheIndexAFewElements(index, ammount));
         }
         [TestCaseSource(typeof(IndexOutOfRangeWithAmmount))]
         public void DeleteInTheEndAFewElementsTest_WhenWhenIndexOutOfRange_ShouldThrowExeption(int ammount, int index, AList list)
         {
-            {
-                Assert.Throws<IndexOutOfRangeException>(() => list.DeleteInTheIndexAFewElements(index, ammount));
-            }
+            Assert.Throws<IndexOutOfRangeException>(() => list.DeleteInTheIndexAFewElements(index, ammount));
         }
 
         [TestCaseSource(typeof(ReturnLengthTestSource))]
@@ -184,10 +174,8 @@ namespace MyArrayListTests
 
         [TestCaseSource(typeof(IndexOutOfRange))]
         public void ChangingByIndexTest_WhenWhenIndexOutOfRange_ShouldThrowExeption(int some, int index, AList list)
-        {
-            {
-                Assert.Throws<IndexOutOfRangeException>(() => list[index] = 0);
-            }
+        {           
+            Assert.Throws<IndexOutOfRangeException>(() => list[index] = 0);       
         }
 
         [TestCaseSource(typeof(ReverseTestSource))]

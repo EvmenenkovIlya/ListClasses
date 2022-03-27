@@ -120,7 +120,7 @@ namespace MyArrayList
                 Node crnt = new Node(value);
                 previosNode.Next = crnt;
                 crnt.Next = nextNode;
-                
+
             }
             Length += 1;
         }
@@ -180,6 +180,34 @@ namespace MyArrayList
             _root = GetNode(ammount);
             Length -= ammount;
         }
+
+        public int FindFirstIndexOfValue(int value)
+        {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            int index = 0;
+            Node crnt = _root;
+            while (crnt != null)
+            {
+                if (crnt.Value == value)
+                { 
+                    return index;
+                }
+                index++;
+                crnt = crnt.Next;
+            }
+            return -1;
+        }
+
+        public void Reverse()
+        { 
+            Node crnt = _root;
+            _root = _tail;
+            _tail = crnt;       
+        }
+
 
         public override string ToString()
         {
@@ -248,6 +276,13 @@ namespace MyArrayList
             int tmp = a.Value;
             a.Value = b.Value; 
             b.Value = tmp; 
+        }
+
+        private LinkList CopyOfList()
+        { 
+            LinkList copy = new LinkList();
+            
+            return copy;
         }
 
     }
