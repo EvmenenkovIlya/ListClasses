@@ -157,6 +157,6 @@ namespace MyArrayListTests
             LinkList actualResult = list;
             Assert.AreEqual(expectedResult, actualResult);
         }
-
+        
     }
 }

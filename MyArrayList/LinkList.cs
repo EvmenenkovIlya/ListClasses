@@ -236,13 +236,24 @@ namespace MyArrayList
                 }
                 else
                 {
-                    for (int i = 0; i < this.Length; i++)
+                    Node thisCrnt = this._root;
+                    Node listCrnt = list._root; 
+                    while (thisCrnt != null)
+                    {
+                        if (thisCrnt.Value != listCrnt.Value)
+                        { 
+                            return false;
+                        }
+                        thisCrnt = thisCrnt.Next;
+                        listCrnt = listCrnt.Next;
+                    }
+                    /*for (int i = 0; i < this.Length; i++)
                     {
                         if (list[i] != this[i])
                         {
                             return false;
                         }
-                    }                   
+                    }      */             
                 }
             }
             return true;

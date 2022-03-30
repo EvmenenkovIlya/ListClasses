@@ -318,7 +318,7 @@
         {
             int index = FindFirstIndexOfValue(value);
 
-            if (index > 0)
+            if (index >= 0)
             { 
                 DeleteInTheIndex(index);
             }
@@ -378,21 +378,29 @@
 
         public void AddListInTheIndex(AList list, int index)
         {
+            if (index < 0 || index >= Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (Length == 0 || this == null || list.Length == 0 || list == null)
+            {
+                throw new Exception("List is empty or null");
+            }            
             int newLength = (int)((list.Length + Length) * 1.5d + 1);
             int[] newArray = new int[newLength];
 
 
-            for (int i = 0; i < index - 1; i++)
+            for (int i = 0; i < index; i++)
             {
                 newArray[i] = _array[i];
             }
 
             for (int i = 0; i < list.Length; i++)
             {
-                newArray[i + index - 1] = list[i];
+                newArray[i + index] = list[i];
             }
 
-            for (int i = index - 1; i < Length; i++)
+            for (int i = index; i < Length; i++)
             {
                 newArray[i + list.Length] = _array[i];
             }

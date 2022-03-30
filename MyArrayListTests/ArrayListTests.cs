@@ -34,8 +34,8 @@ namespace MyArrayListTests
 
         [TestCaseSource(typeof(IndexOutOfRange))]
         public void AddInTheIndexTest_WhenIndexOutOfRange_ShouldThrowExeption(int value, int index, AList list)
-        {          
-            Assert.Throws<IndexOutOfRangeException>(() => list.AddInTheIndex(value, index));        
+        {
+            Assert.Throws<IndexOutOfRangeException>(() => list.AddInTheIndex(value, index));
         }
 
         [TestCaseSource(typeof(DeleteLastTestSource))]
@@ -93,7 +93,7 @@ namespace MyArrayListTests
         [TestCaseSource(typeof(AmmountMoreThanLengthOrLessThenZero))]
         public void DeleteInTheEndAFewElementsTest_WhenAmmountOutOfLength_ShouldThrowExeption(int ammount, AList list)
         {
-        Assert.Throws<Exception>(() => list.DeleteInTheEndAFewElements(ammount));
+            Assert.Throws<Exception>(() => list.DeleteInTheEndAFewElements(ammount));
         }
 
         [TestCaseSource(typeof(DeleteInTheStartAFewElementsTestSource))]
@@ -173,9 +173,9 @@ namespace MyArrayListTests
         }
 
         [TestCaseSource(typeof(IndexOutOfRange))]
-        public void ChangingByIndexTest_WhenWhenIndexOutOfRange_ShouldThrowExeption(int some, int index, AList list)
-        {           
-            Assert.Throws<IndexOutOfRangeException>(() => list[index] = 0);       
+        public void ChangingByIndexTest_WhenIndexOutOfRange_ShouldThrowIndexOutOfRangeException(int some, int index, AList list)
+        {
+            Assert.Throws<IndexOutOfRangeException>(() => list[index] = 0);
         }
 
         [TestCaseSource(typeof(ReverseTestSource))]
@@ -258,5 +258,52 @@ namespace MyArrayListTests
             AList actualList = list;
             Assert.AreEqual(expectedList, actualList);
         }
+        [TestCaseSource(typeof(DeleteFirstValueAndReturnIndexTestSource))]
+        public void DeleteFirstValueAndReturnIndexTest(AList list, AList expectedList, int value, int expectedIndex)
+        {
+            int actualIndex = list.DeleteFirstValueAndReturnIndex(value);
+            AList actualList = list;
+            Assert.AreEqual(expectedList, actualList);
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+        [TestCaseSource(typeof(DeleteAllValueAndReturnCountTestSource))]
+        public void DeleteAllValueAndReturnCountTest(AList list, AList expectedList, int value, int expectedIndex)
+        {
+            int actualCount = list.DeleteAllValueAndReturnCount(value);
+            AList actualList = list;
+            Assert.AreEqual(expectedList, actualList);
+            Assert.AreEqual(expectedIndex, actualCount);
+        }
+        [TestCaseSource(typeof(AddListInTheEndTestSorce))]
+        public void AddListInTheEndTest(AList listOne, AList listTwo, AList expectedResult)
+        {
+            listOne.AddListInTheEnd(listTwo);
+            AList actualList = listOne;
+            Assert.AreEqual(expectedResult, actualList);
+        }
+
+        [TestCaseSource(typeof(AddListInTheStartTestSorce))]
+        public void AddListInTheStartTest(AList listOne, AList listTwo, AList expectedResult)
+        {
+            listOne.AddListInTheStart(listTwo);
+            AList actualList = listOne;
+            Assert.AreEqual(expectedResult, actualList);
+        }
+
+        [TestCaseSource(typeof(AddListInTheIndexTestSorce))]
+        public void AddListInTheIndexTest(int index, AList listOne, AList listTwo, AList expectedResult)
+        {
+            listOne.AddListInTheIndex(listTwo, index);
+            AList actualList = listOne;
+            Assert.AreEqual(expectedResult, actualList);
+        }
+        [TestCaseSource(typeof(IndexOutOfRange))]
+        public void AddListInTheIndexTest_WhenIndexOutOfRange_ShouldThrowExeption(int some, int index, AList list)
+        {
+            Assert.Throws<IndexOutOfRangeException>(() => list.AddListInTheIndex(list, index));
+        }
+
+
+
     }
 }
