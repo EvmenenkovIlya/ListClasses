@@ -142,7 +142,6 @@ namespace MyArrayListTests
             Assert.AreEqual(expectedLength, actualLength);
 
         }
-
         [TestCaseSource(typeof(GetByIndexPositiveTestSource))]
         public void GetByIndexTest(int index, int value, LinkList list )
         {
@@ -161,15 +160,13 @@ namespace MyArrayListTests
             list[index] = 5;
             int actualValue = list[index];
             Assert.AreEqual(5, actualValue);
-        }
-        
+        }      
         [TestCaseSource(typeof(FindFirstIndexOfValueTestSource))]
         public void FindFirstIndexOfValueTest(int expectedIndex, int value, LinkList list)
         {
             int actualIndex = list.FindFirstIndexOfValue(value);
             Assert.AreEqual(expectedIndex, actualIndex);
         }
-
         [Test]
         public void FindFirstIndexOfValue_WhenListIsEmpty_ShouldThrowException()
         {
@@ -213,35 +210,30 @@ namespace MyArrayListTests
             LinkList list = new LinkList();
             Assert.Throws<Exception>(() => list.FindMin());
         }
-
         [TestCaseSource(typeof(FindIndexOfMaxTestSource))]
         public void FindIndexOfMaxTest(int expectedIndex, LinkList list)
         {
             int actualIndex = list.FindIndexOfMax();
             Assert.AreEqual(expectedIndex, actualIndex);
         }
-
         [Test]
         public void FindIndexOfMax_WhenListIsEmpty_ShouldThrowException()
         {
             LinkList list = new LinkList();
             Assert.Throws<Exception>(() => list.FindIndexOfMax());
         }
-
         [TestCaseSource(typeof(FindIndexOfMinTestSource))]
         public void FindIndexOfMinTest(int expectedIndex, LinkList list)
         {
             int actualIndex = list.FindIndexOfMin();
             Assert.AreEqual(expectedIndex, actualIndex);
         }
-
         [Test]
         public void FindIndexOfMin_WhenListIsEmpty_ShouldThrowException()
         {
             LinkList list = new LinkList();
             Assert.Throws<Exception>(() => list.FindIndexOfMin());
         }
-
         [TestCaseSource(typeof(AddListInTheEndTestSorce))]
         public void AddListInTheEndTest(LinkList listOne, LinkList listTwo, LinkList expectedResult)
         {
@@ -249,7 +241,6 @@ namespace MyArrayListTests
             LinkList actualList = listOne;
             Assert.AreEqual(expectedResult, actualList);
         }
-
         [TestCaseSource(typeof(AddListInTheStartTestSorce))]
         public void AddListInTheStartTest(LinkList listOne, LinkList listTwo, LinkList expectedResult)
         {
@@ -257,7 +248,6 @@ namespace MyArrayListTests
             LinkList actualList = listOne;
             Assert.AreEqual(expectedResult, actualList);
         }
-
         [TestCaseSource(typeof(AddListInTheIndexTestSorce))]
         public void AddListInTheIndexTest(int index, LinkList listOne, LinkList listTwo, LinkList expectedResult)
         {
@@ -271,5 +261,21 @@ namespace MyArrayListTests
             Assert.Throws<IndexOutOfRangeException>(() => list.AddListInTheIndex(list, index));
         }
 
+        [TestCaseSource(typeof(DeleteFirstValueAndReturnIndexTestSource))]
+        public void DeleteFirstValueAndReturnIndexTest(LinkList list, LinkList expectedList, int value, int expectedIndex)
+        {
+            int actualIndex = list.DeleteFirstValueAndReturnIndex(value);
+            LinkList actualList = list;
+            Assert.AreEqual(expectedList, actualList);
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+        [TestCaseSource(typeof(DeleteAllValueAndReturnCountTestSource))]
+        public void DeleteAllValueAndReturnCountTest(LinkList list, LinkList expectedList, int value, int expectedIndex)
+        {
+            int actualCount = list.DeleteAllValueAndReturnCount(value);
+            LinkList actualList = list;
+            Assert.AreEqual(expectedList, actualList);
+            Assert.AreEqual(expectedIndex, actualCount);
+        }
     }
 }

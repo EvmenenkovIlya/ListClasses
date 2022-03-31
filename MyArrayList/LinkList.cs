@@ -363,7 +363,72 @@ namespace MyArrayList
             return index;
         }
 
-
+        public int DeleteFirstValueAndReturnIndex(int value)
+        {
+            int index = -1;
+            Node crnt = _root;
+            if (_root.Value == value)
+            {
+                DeleteInTheStart();
+                index = 0;
+            }
+            else 
+            {
+                for (int i = 0; i < Length - 1; i++)
+                {
+                    if (crnt.Next.Value == value)
+                    {
+                        index = i+1;
+                        break;
+                    }
+                    crnt = crnt.Next;               
+                }
+                if (index > 0)
+                {
+                    crnt.Next = crnt.Next.Next;
+                    Length--;
+                }
+            }
+            return index;
+        }
+        public int DeleteAllValueAndReturnCount(int value)
+        {  
+            int count = 0;
+            Node crnt = _root;
+            while (crnt != null)
+            {
+                if (_root.Value == value)
+                {
+                    DeleteInTheStart();
+                    count += 1;
+                    crnt = _root;
+                }
+                else 
+                {
+                    if (crnt.Next == null)
+                    {
+                        break;
+                    }
+                    if (crnt.Next.Value == value)
+                    {
+                        if (crnt.Next == null)
+                        {
+                            DeleteInTheEnd();
+                            count += 1;
+                            break;
+                        }
+                        else 
+                        {
+                            crnt.Next = crnt.Next.Next;
+                            count += 1;
+                            Length -= 1;                    
+                        }
+                    }                    
+                    crnt = crnt.Next;
+                }
+            }
+            return count;
+        }
         public void AddListInTheEnd(LinkList list)
         {
             _tail.Next = list._root;
