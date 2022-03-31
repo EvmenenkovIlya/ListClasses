@@ -20,5 +20,11 @@ internal class AddInTheStartTestSource : IEnumerable
         list = new LinkList(new int[] { 55 });
         expectedList = new LinkList(new int[] { 10, 55 });
         yield return new object[] { value, list, expectedList };
+
+        value = 2;
+        
+        list = new LinkList(new int[] { 1, 1 });
+        expectedList = new LinkList(new int[] { 2, 1, 1 });
+        yield return new object[] { value, list, expectedList };
     }
 }

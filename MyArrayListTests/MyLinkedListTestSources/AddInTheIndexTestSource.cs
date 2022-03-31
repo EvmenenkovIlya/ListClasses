@@ -18,6 +18,11 @@ internal class AddInTheIndexTestSource : IEnumerable
         list = new LinkList(new int[] { 1, 1 });
         expectedList = new LinkList(new int[] { 2, 1, 1 });
         yield return new object[] { value, index, list, expectedList };
+        value = 0;
+        index = 1;
+        list = new LinkList(new int[] { 1, 1 });
+        expectedList = new LinkList(new int[] { 1, 0, 1});
+        yield return new object[] { value, index, list, expectedList };
 
         value = 10;
         index = 1;

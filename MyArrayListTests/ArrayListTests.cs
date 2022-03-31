@@ -124,7 +124,7 @@ namespace MyArrayListTests
             Assert.Throws<Exception>(() => list.DeleteInTheIndexAFewElements(index, ammount));
         }
         [TestCaseSource(typeof(IndexOutOfRangeWithAmmount))]
-        public void DeleteInTheEndAFewElementsTest_WhenWhenIndexOutOfRange_ShouldThrowExeption(int ammount, int index, AList list)
+        public void DeleteInTheIndexAFewElementsTest_WhenWhenIndexOutOfRange_ShouldThrowExeption(int ammount, int index, AList list)
         {
             Assert.Throws<IndexOutOfRangeException>(() => list.DeleteInTheIndexAFewElements(index, ammount));
         }

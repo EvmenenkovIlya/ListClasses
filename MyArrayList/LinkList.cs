@@ -65,11 +65,16 @@ namespace MyArrayList
                 _root = null;
                 _tail = null;
             }
-            for (int i = 0; i < array.Length; i++)
+            else 
             {
-                AddInTheEnd(array[i]);
+                _root = new Node(array[0]);
+                _tail = _root;    
+                for (int i = 1; i < array.Length; i++)
+                {
+                    AddInTheEnd(array[i]);
+                }
+                Length = array.Length;
             }
-            Length = array.Length;
         }
 
         public void AddInTheEnd(int value)
@@ -115,14 +120,18 @@ namespace MyArrayList
             }
             else
             {
-                Node previosNode = GetNode(index - 1);
-                Node nextNode = GetNode(index);
-                Node crnt = new Node(value);
-                previosNode.Next = crnt;
-                crnt.Next = nextNode;
+                Node tmp = _root;
 
+                for (int i = 0; i < index - 1; i++)
+                {
+                tmp = tmp.Next;
+                }
+                Node crnt = new Node(value);
+                crnt.Next = tmp.Next;
+                tmp.Next = crnt;
+                Length += 1;
             }
-            Length += 1;
+            
         }
 
         public void DeleteInTheEnd()
@@ -131,7 +140,12 @@ namespace MyArrayList
             {
                 throw new Exception("List is empty or null");
             }
-            _tail = null;
+            Node crnt = _root;
+            for (int i = 0; i < Length - 1; i++)
+            { 
+                crnt = crnt.Next;
+            }
+            _tail = crnt;
             Length -= 1;
         }
 
@@ -145,6 +159,31 @@ namespace MyArrayList
             Length -= 1;
         }
 
+        public void DeleteInTheIndex(int index)
+        {
+            if (index < 0 || index >= Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            if (index == 0)
+            {
+                DeleteInTheStart();
+            }
+            else
+            {
+                Node tmp = _root;
+                for (int i = 0; i < index - 1; i++)
+                {
+                    tmp = tmp.Next;
+                }
+                tmp.Next = tmp.Next.Next;
+                Length--;
+            }
+        }
         public void DeleteInTheEndAFewElements(int ammount)
         {
             if ((ammount < 0) || (ammount > Length))
@@ -180,6 +219,61 @@ namespace MyArrayList
             _root = GetNode(ammount);
             Length -= ammount;
         }
+        public void DeleteInTheIndexAFewElements(int index, int ammount)
+        {
+            if ((ammount < 0) || (ammount > Length))
+            {
+                throw new Exception("Ammount of elements must be more then zero  and less than Length");
+            }
+            if (index < 0 || index >= Length || (index + ammount > Length))
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            if (ammount == 0)
+            {
+                return;
+            }
+            if (index == 0)
+            {
+                DeleteInTheStartAFewElements(ammount);
+            }
+            else 
+            {
+                Node startDeleting = null;
+                Node endDeleting = _root;
+                for (int i = 0; i < index + ammount; i++)
+                {
+                    if (i == index - 1)
+                    {
+                        startDeleting = endDeleting;
+                    }
+
+                    endDeleting = endDeleting.Next;
+                }
+                startDeleting.Next = endDeleting;
+                Length -= ammount;
+            }
+            
+
+             
+
+            /*for (int i = index; i < Length; i++)
+            {
+                _array[i] = _array[i + ammount];
+            }
+            Length -= ammount;
+
+            if (Length <= ((int)_array.Length * 0.5))
+            {
+                DownSize();
+            }*/
+        }
+
+
 
         public int FindFirstIndexOfValue(int value)
         {
