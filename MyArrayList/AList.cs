@@ -324,7 +324,6 @@
             }
             return index;        
         }
-
         public int DeleteAllValueAndReturnCount(int value)
         {
             int count = 0;
@@ -342,7 +341,6 @@
             Length -= count;
             return count;
         }
-
         public void AddListInTheEnd(AList list)
         { 
         int newLength = (int) ((list.Length + this.Length) * 1.5d + 1);
@@ -358,7 +356,6 @@
             _array = newArray;
             Length = list.Length + Length;
         }
-
         public void AddListInTheStart(AList list)
         {
             int newLength = (int)((list.Length + this.Length) * 1.5d + 1);
@@ -375,7 +372,6 @@
             _array = newArray;
             Length = list.Length + Length;
         }
-
         public void AddListInTheIndex(AList list, int index)
         {
             if (index < 0 || index >= Length)

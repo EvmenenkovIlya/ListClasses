@@ -76,7 +76,6 @@ namespace MyArrayList
                 Length = array.Length;
             }
         }
-
         public void AddInTheEnd(int value)
         {
             if (_root == null)
@@ -91,7 +90,6 @@ namespace MyArrayList
             }
             Length += 1;
         }
-
         public void AddInTheStart(int value)
         {
             if (_root == null)
@@ -107,7 +105,6 @@ namespace MyArrayList
             }
             Length += 1;
         }
-
         public void AddInTheIndex(int value, int index)
         {
             if (index < 0 || index >= Length)
@@ -130,10 +127,8 @@ namespace MyArrayList
                 crnt.Next = tmp.Next;
                 tmp.Next = crnt;
                 Length += 1;
-            }
-            
+            }            
         }
-
         public void DeleteInTheEnd()
         {
             if (Length == 0 || this == null)
@@ -149,7 +144,6 @@ namespace MyArrayList
             _tail.Next = null;
             Length -= 1;
         }
-
         public void DeleteInTheStart()
         {
             if (Length == 0 || this == null)
@@ -159,7 +153,6 @@ namespace MyArrayList
             _root = _root.Next;
             Length -= 1;
         }
-
         public void DeleteInTheIndex(int index)
         {
             if (index < 0 || index >= Length)
@@ -203,7 +196,6 @@ namespace MyArrayList
             _tail.Next = null;
             Length -= ammount;
         }
-
         public void DeleteInTheStartAFewElements(int ammount)
         {
             if ((ammount < 0) || (ammount > Length))
@@ -312,7 +304,6 @@ namespace MyArrayList
             }
             return max;
         }
-
         public int FindMin()
         {
             if (Length == 0 || this == null)
@@ -370,6 +361,42 @@ namespace MyArrayList
                 crnt = crnt.Next;
             }
             return index;
+        }
+
+
+        public void AddListInTheEnd(LinkList list)
+        {
+            _tail.Next = list._root;
+            _tail = list._tail;
+            Length = Length + list.Length;
+        }
+        public void AddListInTheStart(LinkList list)
+        {
+            list._tail.Next = _root;
+            _root = list._root;
+            Length = Length + list.Length;
+        }
+        public void AddListInTheIndex(LinkList list, int index)
+        {
+            if (index < 0 || index >= Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (index == 0)
+            {
+                AddListInTheStart(list);
+            }
+            else 
+            {
+            Node crnt = _root;
+            for (int i = 1; i < index; i++)
+            {
+                crnt = crnt.Next;
+            }
+            list._tail.Next = crnt.Next;
+            crnt.Next = list._root;
+            Length = Length + list.Length;
+            }
         }
 
         public override string ToString()
@@ -445,19 +472,5 @@ namespace MyArrayList
             }
             return crnt;
         }
-        private void SwapValueInNode(ref Node a, ref Node b)
-        {
-            int tmp = a.Value;
-            a.Value = b.Value; 
-            b.Value = tmp; 
-        }
-
-        private LinkList CopyOfList()
-        { 
-            LinkList copy = new LinkList();
-            
-            return copy;
-        }
-
     }
 }

@@ -242,7 +242,34 @@ namespace MyArrayListTests
             Assert.Throws<Exception>(() => list.FindIndexOfMin());
         }
 
+        [TestCaseSource(typeof(AddListInTheEndTestSorce))]
+        public void AddListInTheEndTest(LinkList listOne, LinkList listTwo, LinkList expectedResult)
+        {
+            listOne.AddListInTheEnd(listTwo);
+            LinkList actualList = listOne;
+            Assert.AreEqual(expectedResult, actualList);
+        }
 
+        [TestCaseSource(typeof(AddListInTheStartTestSorce))]
+        public void AddListInTheStartTest(LinkList listOne, LinkList listTwo, LinkList expectedResult)
+        {
+            listOne.AddListInTheStart(listTwo);
+            LinkList actualList = listOne;
+            Assert.AreEqual(expectedResult, actualList);
+        }
+
+        [TestCaseSource(typeof(AddListInTheIndexTestSorce))]
+        public void AddListInTheIndexTest(int index, LinkList listOne, LinkList listTwo, LinkList expectedResult)
+        {
+            listOne.AddListInTheIndex(listTwo, index);
+            LinkList actualList = listOne;
+            Assert.AreEqual(expectedResult, actualList);
+        }
+        [TestCaseSource(typeof(IndexOutOfRange))]
+        public void AddListInTheIndexTest_WhenIndexOutOfRange_ShouldThrowExeption( int index, LinkList list)
+        {
+            Assert.Throws<IndexOutOfRangeException>(() => list.AddListInTheIndex(list, index));
+        }
 
     }
 }
