@@ -183,6 +183,66 @@ namespace MyArrayListTests
             LinkList actualResult = list;
             Assert.AreEqual(expectedResult, actualResult);
         }
-        
+        [Test]
+        public void ReverseTest_WhenListIsEmpty_ShouldThrowException()
+        {
+            LinkList list = new LinkList();
+            Assert.Throws<Exception>(() => list.Reverse());
+        }
+        [TestCaseSource(typeof(FindMaxTestSource))]
+        public void FindMaxTest(int expectedMax, LinkList list)
+        {
+            int actualMax = list.FindMax();
+            Assert.AreEqual(expectedMax, actualMax);
+        }
+        [Test]
+        public void FindMax_WhenListIsEmpty_ShouldThrowException()
+        {
+            LinkList list = new LinkList();
+            Assert.Throws<Exception>(() => list.FindMax());
+        }
+        [TestCaseSource(typeof(FindMinTestSource))]
+        public void FindMinTest(int expectedMax, LinkList list)
+        {
+            int actualMax = list.FindMin();
+            Assert.AreEqual(expectedMax, actualMax);
+        }
+        [Test]
+        public void FindMin_WhenListIsEmpty_ShouldThrowException()
+        {
+            LinkList list = new LinkList();
+            Assert.Throws<Exception>(() => list.FindMin());
+        }
+
+        [TestCaseSource(typeof(FindIndexOfMaxTestSource))]
+        public void FindIndexOfMaxTest(int expectedIndex, LinkList list)
+        {
+            int actualIndex = list.FindIndexOfMax();
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+
+        [Test]
+        public void FindIndexOfMax_WhenListIsEmpty_ShouldThrowException()
+        {
+            LinkList list = new LinkList();
+            Assert.Throws<Exception>(() => list.FindIndexOfMax());
+        }
+
+        [TestCaseSource(typeof(FindIndexOfMinTestSource))]
+        public void FindIndexOfMinTest(int expectedIndex, LinkList list)
+        {
+            int actualIndex = list.FindIndexOfMin();
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+
+        [Test]
+        public void FindIndexOfMin_WhenListIsEmpty_ShouldThrowException()
+        {
+            LinkList list = new LinkList();
+            Assert.Throws<Exception>(() => list.FindIndexOfMin());
+        }
+
+
+
     }
 }

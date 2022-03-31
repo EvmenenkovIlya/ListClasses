@@ -146,6 +146,7 @@ namespace MyArrayList
                 crnt = crnt.Next;
             }
             _tail = crnt;
+            _tail.Next = null;
             Length -= 1;
         }
 
@@ -199,6 +200,7 @@ namespace MyArrayList
                 throw new Exception("List is empty or null");
             }
             _tail = GetNode(Length - ammount);
+            _tail.Next = null;
             Length -= ammount;
         }
 
@@ -251,30 +253,12 @@ namespace MyArrayList
                     {
                         startDeleting = endDeleting;
                     }
-
                     endDeleting = endDeleting.Next;
                 }
                 startDeleting.Next = endDeleting;
                 Length -= ammount;
             }
-            
-
-             
-
-            /*for (int i = index; i < Length; i++)
-            {
-                _array[i] = _array[i + ammount];
-            }
-            Length -= ammount;
-
-            if (Length <= ((int)_array.Length * 0.5))
-            {
-                DownSize();
-            }*/
         }
-
-
-
         public int FindFirstIndexOfValue(int value)
         {
             if (Length == 0 || this == null)
@@ -294,14 +278,99 @@ namespace MyArrayList
             }
             return -1;
         }
-
         public void Reverse()
-        { 
+        {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
             Node crnt = _root;
-            _root = _tail;
-            _tail = crnt;       
+            Node next;
+            while (crnt.Next != null)
+            {
+                next = crnt.Next;
+                crnt.Next = next.Next;
+                next.Next = _root;
+                _root = next;
+            }           
+        }
+        public int FindMax()
+        {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            int max = _root.Value;
+            Node crnt = _root;
+            while (crnt.Next != null)
+            {
+                crnt = crnt.Next;
+                if (crnt.Value > max)
+                { 
+                    max = crnt.Value;
+                }
+            }
+            return max;
         }
 
+        public int FindMin()
+        {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            int min = _root.Value;
+            Node crnt = _root;
+            while (crnt.Next != null)
+            {
+                crnt = crnt.Next;
+                if (crnt.Value < min)
+                { 
+                    min = crnt.Value;
+                }
+            }
+            return min;
+        }
+        public int FindIndexOfMax()
+        {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            int index = 0;
+            int max = _root.Value;
+            Node crnt = _root;
+            for (int i = 0; i < Length; i++)
+            {                
+                if(crnt.Value > max)
+                {
+                    index = i;
+                    max = crnt.Value;
+                }
+                crnt = crnt.Next;
+            }
+            return index;
+        }
+        public int FindIndexOfMin()
+        {
+            if (Length == 0 || this == null)
+            {
+                throw new Exception("List is empty or null");
+            }
+            int index = 0;
+            int min = _root.Value;
+            Node crnt = _root;
+            for (int i = 0; i < Length; i++)
+            {
+                if (crnt.Value < min)
+                {
+                    index = i;
+                    min = crnt.Value;
+                }
+                crnt = crnt.Next;
+            }
+            return index;
+        }
 
         public override string ToString()
         {
