@@ -65,13 +65,11 @@
             _array[Length] = value;
             Length++;
         }
-
         public void AddInTheStart(int value)
         {
             Shift(0, Length + 1, 1);
             _array[0] = value;
         }
-
         public void AddInTheIndex(int value, int index)
         {
             if (index < 0 || index >= Length)
@@ -81,7 +79,6 @@
             Shift(index, Length + 1, 1);
             _array[index] = value;
         }
-
         public void DeleteLast()
         {
             if (Length == 0 || this == null)
@@ -96,7 +93,6 @@
                 DownSize();
             }
         }
-
         public void DeleteFirst()
         {
             if (Length == 0 || this == null)
@@ -105,7 +101,6 @@
             }
             Shift(1, Length, -1);
         }
-
         public void DeleteInTheIndex(int index)
         {
             if (index < 0 || index >= Length)
@@ -119,7 +114,6 @@
 
             Shift(index + 1, Length, -1);
         }
-
         public void DeleteInTheEndAFewElements(int ammount)
         {
             if ((ammount < 0) || (ammount > Length))
@@ -145,7 +139,6 @@
                 DownSize();
             }
         }
-
         public void DeleteInTheStartAFewElements(int ammount)
         {
             if ((ammount < 0) || (ammount > Length))
@@ -162,7 +155,6 @@
             }
             Shift(ammount, Length, -ammount);
         }
-
         public void DeleteInTheIndexAFewElements(int index, int ammount)
         {
             if ((ammount < 0) || (ammount > Length))
@@ -183,7 +175,7 @@
             }
             for (int i = index; i < Length; i++)
             {
-                _array[i] = _array[i + ammount];           
+                _array[i] = _array[i + ammount];
             }
             Length -= ammount;
 
@@ -192,12 +184,10 @@
                 DownSize();
             }
         }
-
         public int ReturnLength()
         {
             return Length;
         }
-
         public int AccessByIndex(int index)
         {
             if (index < 0 || index >= Length)
@@ -221,7 +211,6 @@
             }
             return -1;
         }
-
         public void ChangeValueInTheIndex(int value, int index)
         {
             if (index >= Length)
@@ -230,7 +219,6 @@
             }
             _array[index] = value;
         }
-
         public void Reverse()
         {
             for (int i = 0; i < Length / 2; i++)
@@ -238,7 +226,6 @@
                 ChangeNumbers(ref _array[i], ref _array[Length - i - 1]);
             }
         }
-
         public int FindMax()
         {
             if (Length == 0 || this == null)
@@ -249,13 +236,12 @@
             for (int i = 0; i < Length; i++)
             {
                 if (_array[i] > max)
-                { 
+                {
                     max = _array[i];
                 }
             }
             return max;
         }
-
         public int FindMin()
         {
             if (Length == 0 || this == null)
@@ -272,7 +258,6 @@
             }
             return min;
         }
-
         public int FindIndexOfMax()
         {
             if (Length == 0 || this == null)
@@ -282,7 +267,6 @@
             int max = FindMax();
             return FindFirstIndexOfValue(max);
         }
-
         public int FindIndexOfMin()
         {
             if (Length == 0 || this == null)
@@ -292,7 +276,6 @@
             int min = FindMin();
             return FindFirstIndexOfValue(min);
         }
-
         public void BubbleSort(bool reverse = false)
         {
             int[] sortedArray = new int[_array.Length];
@@ -308,12 +291,11 @@
                 }
             }
             _array = sortedArray;
-            if (reverse) 
+            if (reverse)
             {
                 Reverse();
             }
         }
-
         public int DeleteFirstValueAndReturnIndex(int value)
         {
             int index = FindFirstIndexOfValue(value);
@@ -414,7 +396,6 @@
             }
             _array = newArray;
         }
-
         private void DownSize()
         {
             int newLength = (int)(_array.Length / 1.3d + 1);
