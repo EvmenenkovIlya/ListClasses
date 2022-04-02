@@ -1,6 +1,13 @@
-﻿namespace MyArrayList
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MyArrayLists;
+
+namespace MyArrayList
 {
-    public class AList
+    public class AList : IMyList
     {
         public int Length { get; private set; }
 
@@ -30,7 +37,6 @@
             _array = new int[10];
             Length = 0;
         }
-
         public AList(int element)
         {
             _array = new int[10];
@@ -65,13 +71,11 @@
             _array[Length] = value;
             Length++;
         }
-
         public void AddInTheStart(int value)
         {
             Shift(0, Length + 1, 1);
             _array[0] = value;
         }
-
         public void AddInTheIndex(int value, int index)
         {
             if (index < 0 || index >= Length)
@@ -81,7 +85,6 @@
             Shift(index, Length + 1, 1);
             _array[index] = value;
         }
-
         public void DeleteLast()
         {
             if (Length == 0 || this == null)

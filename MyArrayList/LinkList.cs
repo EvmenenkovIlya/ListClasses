@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyArrayLists;
 
-namespace MyArrayList
+namespace MyArrayList 
 {
-    public class LinkList
+    public class LinkList : IMyList
     {
         private Node _root;
 
@@ -178,7 +179,7 @@ namespace MyArrayList
                 Length--;
             }
         }
-        public void DeleteInTheEndAFewElements(int ammount)
+        public void DeleteInTheEnd(int ammount)
         {
             if ((ammount < 0) || (ammount > Length))
             {
@@ -196,7 +197,7 @@ namespace MyArrayList
             _tail.Next = null;
             Length -= ammount;
         }
-        public void DeleteInTheStartAFewElements(int ammount)
+        public void DeleteInTheStart(int ammount)
         {
             if ((ammount < 0) || (ammount > Length))
             {
@@ -213,7 +214,7 @@ namespace MyArrayList
             _root = GetNode(ammount);
             Length -= ammount;
         }
-        public void DeleteInTheIndexAFewElements(int index, int ammount)
+        public void DeleteInTheIndex(int index, int ammount)
         {
             if ((ammount < 0) || (ammount > Length))
             {
@@ -233,7 +234,7 @@ namespace MyArrayList
             }
             if (index == 0)
             {
-                DeleteInTheStartAFewElements(ammount);
+                DeleteInTheStart(ammount);
             }
             else 
             {

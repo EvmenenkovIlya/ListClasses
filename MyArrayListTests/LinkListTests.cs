@@ -42,7 +42,6 @@ namespace MyArrayListTests
             LinkList actualList = list;
             Assert.AreEqual(expectedList, actualList);
         }
-
         [Test]
         public void DeleteInTheEndTest_WhenListIsEmpty_ShouldThrowException()
         {
@@ -57,7 +56,6 @@ namespace MyArrayListTests
             LinkList actualList = list;
             Assert.AreEqual(expectedList, actualList);
         }
-
         [Test]
         public void DeleteInTheStartTest_WhenListIsEmpty_ShouldThrowException()
         {
@@ -71,70 +69,61 @@ namespace MyArrayListTests
             LinkList actualList = list;
             Assert.AreEqual(expectedList, actualList);
         }
-
         [TestCaseSource(typeof(DeleteInTheEndAFewElementsTestSource))]
         public void DeleteInTheEndAFewElementsTest(int ammount, LinkList list, LinkList expectedList)
         {
-            list.DeleteInTheEndAFewElements(ammount);
+            list.DeleteInTheEnd(ammount);
             LinkList actualList = list;
             Assert.AreEqual(expectedList, actualList);
         }
-
         [Test]
         public void DeleteInTheEndAFewElementsTest_WhenListIsEmpty_ShouldThrowException()
         {
             LinkList list = new LinkList();
-            Assert.Throws<Exception>(() => list.DeleteInTheStartAFewElements(2));
-        }
-        
+            Assert.Throws<Exception>(() => list.DeleteInTheStart(2));
+        }       
         [TestCaseSource(typeof(WhenAmmountMoreThanLengthOrLessThanZeroTestSource))]
         public void DeleteInTheEndAFewElementsTest_WhenAmmountMoreThanLengthOrLessThanZero_ShouldThrowException(int ammount, LinkList list)
         {
           
-            Assert.Throws<Exception>(() => list.DeleteInTheEndAFewElements(ammount));
+            Assert.Throws<Exception>(() => list.DeleteInTheEnd(ammount));
         }
-
         [TestCaseSource(typeof(DeleteInTheStartAFewElementsTestSource))]
         public void DeleteInTheStartAFewElementsTest(int ammount, LinkList list, LinkList expectedList)
         {
-            list.DeleteInTheStartAFewElements(ammount);
+            list.DeleteInTheStart(ammount);
             LinkList actualList = list;
             Assert.AreEqual(expectedList, actualList);
         }
-
         [Test]
         public void DeleteInTheStartAFewElementsTest_WhenListIsEmpty_ShouldThrowException()
         {
             LinkList list = new LinkList();
-            Assert.Throws<Exception>(() => list.DeleteInTheStartAFewElements(2));
+            Assert.Throws<Exception>(() => list.DeleteInTheStart(2));
         }
-
         [TestCaseSource(typeof(WhenAmmountMoreThanLengthOrLessThanZeroTestSource))]
         public void DeleteInTheStartAFewElementsTest_WhenAmmountMoreThanLengthOrLessThanZero_ShouldThrowException(int ammount, LinkList list)
         {
 
-            Assert.Throws<Exception>(() => list.DeleteInTheStartAFewElements(ammount));
-        }
-        
+            Assert.Throws<Exception>(() => list.DeleteInTheStart(ammount));
+        }       
         [TestCaseSource(typeof(DeleteInTheIndexAFewElementsTestSource))]
         public void DeleteInTheIndexAFewElementsTest(int index, int ammount, LinkList list, LinkList expectedList)
         {
-            list.DeleteInTheIndexAFewElements(index, ammount);
+            list.DeleteInTheIndex(index, ammount);
             LinkList actualList = list;
             Assert.AreEqual(expectedList, actualList);
         }
-
         [TestCaseSource(typeof(WhenAmmountMoreThanLengthOrLessThanZeroTestSource))]
         public void DeleteInTheIndexAFewElementsTest_WhenAmmountOutOfLength_ShouldThrowExeption(int ammount,  LinkList list)
         {
-            Assert.Throws<Exception>(() => list.DeleteInTheIndexAFewElements(0, ammount));
+            Assert.Throws<Exception>(() => list.DeleteInTheIndex(0, ammount));
         }
         [TestCaseSource(typeof(IndexOutOfRange))]
         public void DeleteInTheIndexAFewElementsTest_WhenIndexOutOfRange_ShouldThrowIndexOutOfRangeException( int index, LinkList list)
         {
-            Assert.Throws<IndexOutOfRangeException>(() => list.DeleteInTheIndexAFewElements(index, 0));
+            Assert.Throws<IndexOutOfRangeException>(() => list.DeleteInTheIndex(index, 0));
         }
-
         [TestCaseSource(typeof(LengthTestSource))]
         public void LengthTest(int expectedLength, LinkList list)
         {
