@@ -234,6 +234,15 @@ namespace MyArrayListTests
             LinkList list = new LinkList();
             Assert.Throws<Exception>(() => list.FindIndexOfMin());
         }
+        [TestCaseSource(typeof(IncreaseSortTestSource))]
+        public void SortTest(LinkList list, LinkList expectedList)
+        {
+            list.Sort();
+            LinkList actualList = list;
+            Assert.AreEqual(expectedList, actualList);
+        }
+
+
         [TestCaseSource(typeof(AddListInTheEndTestSorce))]
         public void AddListInTheEndTest(LinkList listOne, LinkList listTwo, LinkList expectedResult)
         {
